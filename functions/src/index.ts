@@ -6,7 +6,7 @@ initializeApp();
 const db = getFirestore();
 
 export const uninstall = onRequest((req, res) => {
-  res.set('Access-Control-Allow-Origin', 'fto2001.github.io');
+  res.set('Access-Control-Allow-Origin', 'https://fto2001.github.io');
   res.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.set('Access-Control-Allow-Headers', 'Content-Type');
 
