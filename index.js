@@ -1,10 +1,10 @@
 class UninstallTracker {
   constructor() {
-    this.write_key= '2jHOu6kXeXiLQx9aL1LJCFAPDvb',
-    this.data_plane_url = 'https://bufradkinoouml.dataplane.rudderstack.com',
+    this.writeKey= '2jHOu6kXeXiLQx9aL1LJCFAPDvb',
+    this.dataPlaneUrl = 'https://bufradkinoouml.dataplane.rudderstack.com',
     this.endpoint = 'https://uninstall-wuagwq3jva-uc.a.run.app'
 
-    rudderanalytics.load(this.write_key, this.data_plane_url);
+    rudderanalytics.load(this.writeKey, this.dataPlaneUrl);
   }
 
   async trackIfNotAlreadyUninstalled() {
