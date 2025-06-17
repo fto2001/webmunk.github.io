@@ -1,6 +1,6 @@
 class UninstallTracker {
   constructor() {
-    this.writeKey= '2jHOu6kXeXiLQx9aL1LJCFAPDvb',
+    this.writeKe = '2jHOu6kXeXiLQx9aL1LJCFAPDvb',
     this.dataPlaneUrl = 'https://bufradkinoouml.dataplane.rudderstack.com',
     this.endpoint = 'https://uninstall-wuagwq3jva-uc.a.run.app'
 
