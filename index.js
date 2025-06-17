@@ -12,7 +12,6 @@ class UninstallTracker {
     if (!userId) return;
 
     const isUserAlreadyUninstalled = await this.checkIfUserUninstalled(userId);
-
     if (isUserAlreadyUninstalled) return;
 
     rudderanalytics.identify(userId);
