@@ -1,0 +1,41 @@
+class UninstallTracker {
+  constructor() {
+    this.write_key= '2jHOu6kXeXiLQx9aL1LJCFAPDvb',
+    this.data_plane_url = 'https://bufradkinoouml.dataplane.rudderstack.com',
+    this.endpoint = 'https://uninstall-wuagwq3jva-uc.a.run.app'
+
+    rudderanalytics.load(this.write_key, this.data_plane_url);
+  }
+
+  async trackIfNotAlreadyUninstalled() {
+    const userId = new URLSearchParams(window.location.search).get('userId');
+    if (!userId) return;
+
+    const isUserAlreadyUninstalled = await this.checkIfUserUninstalled(userId);
+
+    if (isUserAlreadyUninstalled) return;
+
+    rudderanalytics.identify(userId);
+    rudderanalytics.track("uninstalled_extension")
+  }
+
+  async checkIfUserUninstalled(userId) {
+    try {
+      const response = await fetch('https://uninstall-wuagwq3jva-uc.a.run.app', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prolificId: userId }),
+      });
+
+      const data = await response.json();
+      return !!data.error;
+    } catch (err) {
+      console.error('Fetch error:', err);
+      return true;
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => new UninstallTracker().trackIfNotAlreadyUninstalled());
