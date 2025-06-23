@@ -1,8 +1,5 @@
 {
   "name": "webmunk.github.io",
   "version": "1.0.0",
-  "license": "ISC",
-  "dependencies": {
-    "firebase": "^11.9.1"
-  }
+  "license": "ISC"
 }

@@ -1,26 +1,30 @@
-class UninstallTracker {
-  constructor() {
-    this.writeKey = '2jHOu6kXeXiLQx9aL1LJCFAPDvb',
-    this.dataPlaneUrl = 'https://bufradkinoouml.dataplane.rudderstack.com',
-    this.endpoint = 'https://uninstall-wuagwq3jva-uc.a.run.app'
+import configList from './config.js';
 
-    rudderanalytics.load(this.writeKey, this.dataPlaneUrl);
-  }
+class UninstallTracker {
+  constructor() {}
 
   async trackIfNotAlreadyUninstalled() {
-    const userId = new URLSearchParams(window.location.search).get('userId');
-    if (!userId) return;
+    const urlParams = new URLSearchParams(window.location.search)
+    const userId = urlParams.get('userId');
+    const key = urlParams.get('key');
 
-    const isUserAlreadyUninstalled = await this.checkIfUserUninstalled(userId);
+    if (!userId || !key) return;
+
+    const config = this.findMatchingConfig(key);
+    if (!config) return;
+
+    rudderanalytics.load(config.rudderstack_write_key, config.rudderstack_data_plane);
+
+    const isUserAlreadyUninstalled = await this.checkIfUserUninstalled(userId, config.endpoint);
     if (isUserAlreadyUninstalled) return;
 
     rudderanalytics.setAnonymousId(userId);
     rudderanalytics.track("uninstalled_extension")
   }
 
-  async checkIfUserUninstalled(userId) {
+  async checkIfUserUninstalled(userId, endPoint) {
     try {
-      const response = await fetch(this.endpoint, {
+      const response = await fetch(endPoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,6 +37,10 @@ class UninstallTracker {
     } catch (err) {
       return true;
     }
+  }
+
+  findMatchingConfig(key) {
+    return configList.find((c) => c.key === key);
   }
 }
 
