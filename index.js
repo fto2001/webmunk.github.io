@@ -4,7 +4,7 @@ class UninstallTracker {
   constructor() {}
 
   async trackIfNotAlreadyUninstalled() {
-    const urlParams = new URLSearchParams(window.location.search)
+    const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get('userId');
     const key = urlParams.get('key');
 
