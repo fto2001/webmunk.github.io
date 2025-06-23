@@ -11,7 +11,7 @@ This repository contains a simple webpage used to track the uninstallation of a 
 
 ## How to use
 
-Open the page with the `userId` query parameter, for example:
-`https://webmunk.github.io/?userId=1234567890`
+Open the page with the `userId` and `key` query parameters, for example:
+`https://webmunk.github.io/?key=sephora&userId=1234567890`
 
 The page will automatically track the uninstall event if it hasn’t been recorded before.
