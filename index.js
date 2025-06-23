@@ -18,7 +18,7 @@ class UninstallTracker {
     const isUserAlreadyUninstalled = await this.checkIfUserUninstalled(userId, config.endpoint);
     if (isUserAlreadyUninstalled) return;
 
-    rudderanalytics.setAnonymousId(userId);
+    rudderanalytics.identify(userId);
     rudderanalytics.track("uninstalled_extension")
   }
 
